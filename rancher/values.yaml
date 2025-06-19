@@ -135,7 +135,7 @@ resources: {}
 #   Where to offload the TLS/SSL encryption
 # - ingress (default)
 # - external
-tls: false
+tls: none
 
 systemDefaultRegistry: ""
 
