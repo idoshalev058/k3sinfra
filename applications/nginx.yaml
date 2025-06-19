@@ -1,0 +1,11 @@
+project: default
+source:
+  repoURL: git@github.com:idoshalev058/k3sinfra.git
+  path: ingress-nginx-main/ingress-nginx-main/charts/ingress-nginx
+  targetRevision: main
+  helm:
+    valueFiles:
+      - values.yaml
+destination:
+  server: https://kubernetes.default.svc
+  namespace: ingress-nginx
