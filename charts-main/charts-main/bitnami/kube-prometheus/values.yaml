@@ -2122,7 +2122,7 @@ alertmanager:
   ingress:
     ## @param alertmanager.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param alertmanager.ingress.pathType Ingress Path type
     ##
     pathType: ImplementationSpecific
@@ -2151,7 +2151,7 @@ alertmanager:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: "nginx"
     ## @param alertmanager.ingress.tls Enable TLS configuration for the hostname defined at alertmanager.ingress.hostname parameter
     ## TLS certificates will be retrieved from a TLS secret with name: {{- printf "%s-tls" .Values.alertmanager.ingress.hostname }}
     ## You can use the alertmanager.ingress.secrets parameter to create this TLS secret or relay on cert-manager to create it
@@ -2454,7 +2454,7 @@ exporters:
   node-exporter:
     ## @param exporters.node-exporter.enabled Enable node-exporter
     ##
-    enabled: true
+    enabled: false
   kube-state-metrics:
     ## @param exporters.kube-state-metrics.enabled Enable kube-state-metrics
     ##
@@ -2545,7 +2545,7 @@ kubelet:
 blackboxExporter:
   ## @param blackboxExporter.enabled Enable Blackbox Exporter deployment
   ##
-  enabled: true
+  enabled: false
   ## Bitnami Alertmanager image version
   ## ref: https://hub.docker.com/r/bitnami/prometheus-operator/tags/
   ## @param blackboxExporter.image.registry [default: REGISTRY_NAME] Blackbox Exporter image registry
