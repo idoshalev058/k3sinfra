@@ -1,0 +1,11 @@
+project: default
+source:
+  repoURL: git@github.com:idoshalev058/k3sinfra.git
+  path: rancher
+  targetRevision: main
+  helm:
+    valueFiles:
+      - values.yaml
+destination:
+  server: https://kubernetes.default.svc
+  namespace: cattle-system
