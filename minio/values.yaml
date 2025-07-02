@@ -1304,7 +1304,7 @@ console:
   ingress:
     ## @param console.ingress.enabled Enable ingress controller resource for MinIO&reg; Console
     ##
-    enabled: false
+    enabled: true
     ## @param console.ingress.apiVersion Force Ingress API version (automatically detected if not set)
     ##
     apiVersion: ""
@@ -1312,10 +1312,10 @@ console:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster.
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: "ngix"
     ## @param console.ingress.hostname Default host for the ingress resource
     ##
-    hostname: minio.local
+    hostname: minio.local.console
     ## @param console.ingress.path The Path to MinIO&reg; Console. You may need to set this to '/*' in order to use this with ALB ingress controllers.
     ##
     path: /
