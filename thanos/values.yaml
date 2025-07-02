@@ -3381,7 +3381,25 @@ ruler:
   ## @param ruler.config Ruler configuration
   ## Specify content for ruler.yml
   ##
-  config: ""
+  config: |
+    groups:
+      - name: example
+        interval: 1m
+        rules:
+          - alert: ExampleAlert
+            expr: vector(1)
+            for: 1m
+            labels:
+              severity: page
+            annotations:
+              summary: "This is an example alert"
+    alertmanagers:
+      - static_configs:
+          - targets:
+              - kube-prometheus-kube-prome-alertmanager.monitoring.svc.cluster.local:9093
+        scheme: http
+        timeout: 10s
+        api_version: v2
   ## @param ruler.dataPath Path to the data directory
   ##
   ## e.g. /data
