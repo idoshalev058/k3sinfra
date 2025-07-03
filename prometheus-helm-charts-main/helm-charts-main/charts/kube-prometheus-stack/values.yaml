@@ -414,7 +414,7 @@ alertmanager:
   ##
   networkPolicy:
     # -- Enable network policy for Alertmanager
-    enabled: true
+    enabled: false
 
     # -- Define policy types. If egress is enabled, both Ingress and Egress will be used
     # Valid values are ["Ingress"] or ["Ingress", "Egress"]
