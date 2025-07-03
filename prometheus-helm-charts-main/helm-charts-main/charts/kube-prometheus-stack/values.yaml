@@ -444,6 +444,10 @@ alertmanager:
         - namespaceSelector:
             matchLabels:
               name: nginx
+      - from:
+        - namespaceSelector:
+            matchLabels:
+              name: kube-system
         # podSelector:
         #   matchLabels:
         #     app: another-app
