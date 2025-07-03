@@ -440,6 +440,10 @@ alertmanager:
         - namespaceSelector:
             matchLabels:
               name: thanos-main
+      - from:
+        - namespaceSelector:
+            matchLabels:
+              name: nginx
         # podSelector:
         #   matchLabels:
         #     app: another-app
