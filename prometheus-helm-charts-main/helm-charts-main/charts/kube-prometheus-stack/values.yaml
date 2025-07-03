@@ -435,11 +435,11 @@ alertmanager:
 
     # -- Additional custom ingress rules
     ##
-    additionalIngress: []
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            name: thanos-main
+    additionalIngress: 
+      - from:
+        - namespaceSelector:
+            matchLabels:
+              name: thanos-main
         # podSelector:
         #   matchLabels:
         #     app: another-app
