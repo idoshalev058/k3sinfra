@@ -414,7 +414,7 @@ alertmanager:
   ##
   networkPolicy:
     # -- Enable network policy for Alertmanager
-    enabled: false
+    enabled: true
 
     # -- Define policy types. If egress is enabled, both Ingress and Egress will be used
     # Valid values are ["Ingress"] or ["Ingress", "Egress"]
@@ -436,13 +436,13 @@ alertmanager:
     # -- Additional custom ingress rules
     ##
     additionalIngress: []
-    # - from:
-    #   - namespaceSelector:
-    #       matchLabels:
-    #         name: another-namespace
-    #     podSelector:
-    #       matchLabels:
-    #         app: another-app
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            name: thanos-main
+        # podSelector:
+        #   matchLabels:
+        #     app: another-app
     # - from:
     #     - podSelector:
     #         matchLabels:
