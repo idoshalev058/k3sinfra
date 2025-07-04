@@ -3963,7 +3963,7 @@ receive:
   ## ref: https://github.com/thanos-io/thanos/blob/release-0.22/docs/proposals-accepted/202012-receive-split.md
   ## Enables running the Thanos Receiver in dual mode. Setting this to "dual-mode" will create a deployment for
   ## the stateless thanos distributor.
-  mode: standalone
+  mode: dual-mode
   ## @param receive.logLevel Thanos Receive log level
   ##
   logLevel: info
@@ -4054,7 +4054,7 @@ receive:
   args: []
   ## @param receive.replicaCount Number of Thanos Receive replicas to deploy
   ##
-  replicaCount: 2
+  replicaCount: 1
   ## @param receive.revisionHistoryLimit The number of old history to retain to allow rollback
   ##
   revisionHistoryLimit: 10
