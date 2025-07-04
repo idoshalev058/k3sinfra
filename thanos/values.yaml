@@ -3963,7 +3963,7 @@ receive:
   ## ref: https://github.com/thanos-io/thanos/blob/release-0.22/docs/proposals-accepted/202012-receive-split.md
   ## Enables running the Thanos Receiver in dual mode. Setting this to "dual-mode" will create a deployment for
   ## the stateless thanos distributor.
-  mode: dual-mode
+  mode: standalone
   ## @param receive.logLevel Thanos Receive log level
   ##
   logLevel: info
@@ -4618,7 +4618,7 @@ receive:
 receiveDistributor:
   ## @param receiveDistributor.enabled Enable/disable Thanos Receive Distributor component
   ##
-  enabled: true
+  enabled: false
   ## @param receiveDistributor.logLevel Thanos Receive Distributor log level
   ##
   logLevel: info
