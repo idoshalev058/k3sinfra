@@ -3958,7 +3958,7 @@ ruler:
 receive:
   ## @param receive.enabled Enable/disable Thanos Receive component
   ##
-  enabled: false
+  enabled: true
   ## @param receive.mode Mode to run receiver in. Valid options are "standalone" or "dual-mode"
   ## ref: https://github.com/thanos-io/thanos/blob/release-0.22/docs/proposals-accepted/202012-receive-split.md
   ## Enables running the Thanos Receiver in dual mode. Setting this to "dual-mode" will create a deployment for
@@ -4520,7 +4520,7 @@ receive:
   ingress:
     ## @param receive.ingress.enabled Set to true to enable ingress record generation
     ##
-    enabled: false
+    enabled: true
     ## @param receive.ingress.hostname When the ingress is enabled, a host pointing to this will be created
     ##
     hostname: thanos-receive.local
@@ -4528,7 +4528,7 @@ receive:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: "nginx"
     ## @param receive.ingress.labels Additional label for the Ingress resource.
     ## Use this parameter to set the required labels for your needs
     ## e.g:
@@ -4618,7 +4618,7 @@ receive:
 receiveDistributor:
   ## @param receiveDistributor.enabled Enable/disable Thanos Receive Distributor component
   ##
-  enabled: false
+  enabled: true
   ## @param receiveDistributor.logLevel Thanos Receive Distributor log level
   ##
   logLevel: info
@@ -4659,7 +4659,7 @@ receiveDistributor:
   args: []
   ## @param receiveDistributor.replicaCount Number of Thanos Receive Distributor replicas to deploy
   ##
-  replicaCount: 1
+  replicaCount: 2
   ## @param receiveDistributor.revisionHistoryLimit The number of old history to retain to allow rollback
   ##
   revisionHistoryLimit: 10
