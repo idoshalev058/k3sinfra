@@ -225,7 +225,7 @@ server:
     # -- Enable the creation of the persistent volume
     enabled: true
     # -- Defines the size of the persistent volume
-    size: 10Gi
+    size: 1Gi
     # -- Defines the path where the volume should be mounted
     mountPath: '/var/lib/woodpecker'
     # -- Defines the storageClass of the persistent volume
