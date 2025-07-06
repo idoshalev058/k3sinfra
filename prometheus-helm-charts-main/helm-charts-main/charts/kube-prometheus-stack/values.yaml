@@ -4491,7 +4491,7 @@ prometheus:
       #   # will render objectStorageConfig secret data and configure it to be used by Thanos custom resource,
       #   # ignored when prometheusspec.thanos.objectStorageConfig.existingSecret is set
       #   # https://thanos.io/tip/thanos/storage.md/#s3
-        secret: {}
+        secret: 
           type: S3
           config:
             bucket: "thanos-test"
