@@ -176,9 +176,9 @@ query:
   ## @param query.dnsDiscovery.sidecarsNamespace Sidecars namespace to discover them using DNS discovery
   ##
   dnsDiscovery:
-    enabled: false
-    sidecarsService: "kube-prometheus-kube-prome-thanos-discovery"
-    sidecarsNamespace: "thanos"
+    enabled: true
+    sidecarsService: ""
+    sidecarsNamespace: "thanos-2"
   ## @param query.stores Statically configure store APIs to connect with Thanos Query
   ##
   stores: []
