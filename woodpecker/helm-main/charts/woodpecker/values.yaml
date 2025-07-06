@@ -279,22 +279,20 @@ server:
 
   ingress:
     # -- Enable the ingress for the server component
-    enabled: false
+    enabled: true
     # -- Add annotations to the ingress
     annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
 
     # -- Defines which ingress controller will implement the resource
-    ingressClassName: ''
+    ingressClassName: 'nginx'
 
     hosts:
-      - host: chart-example.local
+      - host: woodpecker.example.com
         paths:
           - path: /
-            backend:
-              serviceName: chart-example.local
-              servicePort: *servicePort
+            pathType: Prefix
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
