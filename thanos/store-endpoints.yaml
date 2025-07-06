@@ -1,2 +1,3 @@
-stores: 
-  - thanos-2-query-grpc.thanos-2.svc.cluster.local:10901
+query:  
+  stores: 
+    - thanos-2-query-grpc.thanos-2.svc.cluster.local:10901
