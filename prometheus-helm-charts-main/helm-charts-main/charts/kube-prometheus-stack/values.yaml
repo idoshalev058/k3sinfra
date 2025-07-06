@@ -4484,15 +4484,6 @@ prometheus:
       #         fileName: "objstore.yaml"
       ## ObjectStorageConfig configures object storage in Thanos.
       objectStorageConfig:
-        inline: |-
-          type: S3
-          config:
-            bucket: "thanos-test"
-            endpoint: "minio.minio.svc.cluster.local:9000"
-            access_key: "admin"
-            secret_key: "adminadmin"
-            insecure: true
-            signature_version2: false
       #   # use existing secret, if configured, objectStorageConfig.secret will not be used
       #   existingSecret: {}
       #     # name: ""
@@ -4500,14 +4491,14 @@ prometheus:
       #   # will render objectStorageConfig secret data and configure it to be used by Thanos custom resource,
       #   # ignored when prometheusspec.thanos.objectStorageConfig.existingSecret is set
       #   # https://thanos.io/tip/thanos/storage.md/#s3
-      #   secret: {}
-      #     # type: S3
-      #     # config:
-      #     #   bucket: ""
-      #     #   endpoint: ""
-      #     #   region: ""
-      #     #   access_key: ""
-      #     #   secret_key: ""
+        secret: {}
+          type: S3
+          config:
+            bucket: "thanos-test"
+            endpoint: "minio.minio.svc.cluster.local:9000"
+            access_key: "admin"
+            secret_key: "adminadmin"
+            insecure: true
 
     ## Containers allows injecting additional containers. This is meant to allow adding an authentication proxy to a Prometheus pod.
     ## if using proxy extraContainer update targetPort with proxy container port
