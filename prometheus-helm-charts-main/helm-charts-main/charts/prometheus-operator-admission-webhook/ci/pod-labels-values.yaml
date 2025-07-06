@@ -1,6 +1,0 @@
----
-fullnameOverride: admission-webhook
-pod:
-  labels:
-    foo: bar
-    baz: qux

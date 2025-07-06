@@ -1,4 +1,0 @@
----
-fullnameOverride: admission-webhook
-extraArgs:
-  - --log-level=debug

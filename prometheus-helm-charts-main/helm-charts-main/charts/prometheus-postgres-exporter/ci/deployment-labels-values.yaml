@@ -1,5 +1,0 @@
----
-deployment:
-  labels:
-    foo: "bar"
-    baz: "qux"

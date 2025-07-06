@@ -1,8 +1,0 @@
----
-serviceMonitor:
-  enabled: true
-  jobLabel: app.kubernetes.io/name
-  telemetryPath: /metrics
-  labels:
-    foo: bar
-  timeout: 5s

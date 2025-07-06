@@ -1,4 +1,0 @@
----
-fullnameOverride: admission-webhook
-podDisruptionBudget:
-  maxUnavailable: 1
