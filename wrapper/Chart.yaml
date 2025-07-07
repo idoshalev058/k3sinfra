@@ -1,0 +1,8 @@
+apiVersion: v2
+name: prometheus-stack-wrapper
+version: 0.1.0
+dependencies:
+  - name: kube-prometheus-stack
+    version: 75.9.0
+  - name: thanos
+    version: 17.0.6
