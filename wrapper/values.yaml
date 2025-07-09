@@ -1,4 +1,5 @@
 kube-prometheus-stack:
+  fullnameOverride: "prom"
   prometheus:
     fullnameOverride: "prom"
     prometheusSpec:
@@ -25,7 +26,7 @@ thanos:
   query:
     dnsDiscovery:
       sidecarsService: "prom-thanos-discovery"
-      sidecarsNamespace: "idoneedtofix"
+      sidecarsNamespace: "{{.namespace}}"
   compactor:
     enabled: true
   storegateway:
@@ -33,6 +34,10 @@ thanos:
   ruler:
     enabled: true
     alertmanagers:
-      - http://kube-prometheus-kube-prome-alertmanager.monitoring.svc.cluster.local:90
+      - http://prom-alertmanager.{{.namespace}}.svc.cluster.local:9093
+    config: |
+      groups:
+      - name: minimal
+        rules: []
   receive:
-  enabled: true
+    enabled: true
