@@ -32,5 +32,7 @@ thanos:
     enabled: true
   ruler:
     enabled: true
+    alertmanagers:
+      - http://kube-prometheus-kube-prome-alertmanager.monitoring.svc.cluster.local:90
   receive:
   enabled: true
