@@ -1,5 +1,5 @@
 kube-prometheus-stack:
-  kube-state-metrics:
+  kubeStateMetrics:
     enabled: true
   prometheusOperator:
     enabled: false
