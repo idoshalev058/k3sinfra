@@ -1,4 +1,6 @@
 kube-prometheus-stack:
+  kubeStateMetrics:
+    enabled: true
   kube-state-metrics:
     rbac:
       create: true
