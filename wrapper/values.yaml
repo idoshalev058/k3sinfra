@@ -1,6 +1,4 @@
 kube-prometheus-stack:
-  kubeStateMetrics:
-    enabled: true
   prometheusOperator:
     enabled: false
   crds:
