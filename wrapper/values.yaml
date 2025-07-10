@@ -4,9 +4,6 @@ kube-prometheus-stack:
       create: false
   prometheusOperator:
     enabled: false
-  global:
-    rbac:
-      create: false
   crds:
     enabled: false  
   nodeExporter:
