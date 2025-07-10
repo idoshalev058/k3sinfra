@@ -41,7 +41,7 @@ thanos:
     dnsDiscovery:
       sidecarsService: "prom-thanos-discovery"
       #sidecarsNamespace: "{{.namespace}}"
-      sidecarsNamespace: "ido"
+      sidecarsNamespace: "shob"
   compactor:
     enabled: true
   storegateway:
@@ -51,7 +51,7 @@ thanos:
     # alertmanagers:
     #   - http://prom-alertmanager.{{.namespace}}.svc.cluster.local:9093    
     alertmanagers:
-      - http://prom-alertmanager.ido.svc.cluster.local:9093
+      - http://prom-alertmanager.shob.svc.cluster.local:9093
     
     config: |
       groups:
