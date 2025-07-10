@@ -40,8 +40,8 @@ thanos:
   query:
     dnsDiscovery:
       sidecarsService: "prom-thanos-discovery"
-      #sidecarsNamespace: "{{.namespace}}"
-      sidecarsNamespace: "shob"
+      sidecarsNamespace: "{{.namespace}}"
+      #sidecarsNamespace: "shob"
   compactor:
     enabled: true
   storegateway:
