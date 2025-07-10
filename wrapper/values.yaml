@@ -1,4 +1,7 @@
 kube-prometheus-stack:
+  kube-state-metrics:
+    rbac:
+      create: true
   prometheusOperator:
     enabled: false
   crds:
