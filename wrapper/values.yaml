@@ -1,6 +1,20 @@
 kube-prometheus-stack:
+  kube-state-metrics:
+    rbac:
+      create: false
+  prometheusOperator:
+    enabled: false
+  global:
+    rbac:
+      create: false
+  crds:
+    enabled: false  
+  nodeExporter:
+    enabled: false
   fullnameOverride: "prom"
   prometheus:
+    thanosService:
+      enabled: true
     fullnameOverride: "prom"
     prometheusSpec:
       thanos: 
@@ -26,15 +40,19 @@ thanos:
   query:
     dnsDiscovery:
       sidecarsService: "prom-thanos-discovery"
-      sidecarsNamespace: "{{.namespace}}"
+      #sidecarsNamespace: "{{.namespace}}"
+      sidecarsNamespace: "ido"
   compactor:
     enabled: true
   storegateway:
     enabled: true
   ruler:
     enabled: true
+    # alertmanagers:
+    #   - http://prom-alertmanager.{{.namespace}}.svc.cluster.local:9093    
     alertmanagers:
-      - http://prom-alertmanager.{{.namespace}}.svc.cluster.local:9093
+      - http://prom-alertmanager.ido.svc.cluster.local:9093
+    
     config: |
       groups:
       - name: minimal
