@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: my-thanos-ruler-config
+  name: prometheus-ruler-rules
 data:
   ruler.yml: |
     groups:
