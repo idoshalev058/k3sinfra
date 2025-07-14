@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-thanos-ruler-config
+data:
+  ruler.yml: |
+    groups:
+      - name: minimal
+        rules: []

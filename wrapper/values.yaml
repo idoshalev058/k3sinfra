@@ -51,9 +51,6 @@ thanos:
     alertmanagers:
       - http://prom-alertmanager.shob.svc.cluster.local:9093
     
-    config: |
-      groups:
-      - name: minimal
-        rules: []
+    existingConfigmap: "prometheus-ruler-rules"
   receive:
     enabled: true
