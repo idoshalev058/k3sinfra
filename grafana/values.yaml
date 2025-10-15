@@ -310,7 +310,7 @@ ingress:
   #         name: use-annotation
 
 
-  tls: []
+  tls: false
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
