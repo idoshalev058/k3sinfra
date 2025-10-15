@@ -16,8 +16,10 @@
 *.tmp
 *~
 # Various IDEs
-.vscode
 .project
 .idea/
 *.tmproj
-OWNERS
+# img folder
+img/
+# Changelog
+CHANGELOG.md
