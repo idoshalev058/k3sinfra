@@ -69,10 +69,10 @@ tempo:
   overrides:
     # -- Default config values for all tenants, can be overridden by per-tenant overrides. If a tenant's specific overrides are not found in the `per_tenant_overrides` block, the values in this `default` block will be used. Configs inside this block should follow the new overrides indentation format
     defaults: {}
-    #  metrics_generator:
-    #    processors:
-    #      - service-graphs
-    #      - span-metrics
+    metrics_generator:
+      processors:
+        - service-graphs
+        - span-metrics
 
     # -- Path to the per tenant override config file. The values of the `per_tenant_overrides` config below will be written to the default path `/conf/overrides.yaml`. Users can set tenant-specific overrides settings in a separate file and point per_tenant_override_config to it if not using the per_tenant_overrides block below.
     per_tenant_override_config: /conf/overrides.yaml
