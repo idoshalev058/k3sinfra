@@ -775,7 +775,7 @@ networkPolicy:
 ingress:
   ## @param ingress.enabled Set to true to enable ingress record generation
   ##
-  enabled: false
+  enabled: true
   ## DEPRECATED: Use ingress.annotations instead of ingress.certManager
   ## certManager: false
   ##
@@ -853,7 +853,7 @@ ingress:
   ##
   selfSigned: false
   ## @param ingress.ingressClassName IngressClass that will be be used to implement the Ingress (Kubernetes 1.18+)
-  ingressClassName: ""
+  ingressClassName: "nginx"
   ## @param ingress.extraRules Additional rules to be covered with this ingress record
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-rules
   ## e.g:
