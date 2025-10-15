@@ -22,6 +22,10 @@ spec:
         timeout: 10s
 
     exporters:
+      otlp/tempo:
+         endpoint: "tempo.tempo.svc.cluster.local:4317"
+         tls:
+           insecure: true  
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
       debug: {}
 
@@ -30,4 +34,4 @@ spec:
         traces:
           receivers: [otlp]
           processors: [memory_limiter, batch]
-          exporters: [debug]
+          exporters: [otlp/tempo]
