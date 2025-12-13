@@ -33,7 +33,7 @@ oap:
   name: oap
   image:
     repository: skywalking.docker.scarf.sh/apache/skywalking-oap-server
-    tag: null # Must be set explicitly
+    tag: "latest"
     pullPolicy: IfNotPresent
   storageType: null
   ports:
@@ -137,7 +137,7 @@ ui:
   replicas: 1
   image:
     repository: skywalking.docker.scarf.sh/apache/skywalking-ui
-    tag: null # Must be set explicitly
+    tag: "latest"
     pullPolicy: IfNotPresent
   # podAnnotations:
   #   example: oap-foo
