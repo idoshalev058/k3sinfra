@@ -33,9 +33,9 @@ oap:
   name: oap
   image:
     repository: skywalking.docker.scarf.sh/apache/skywalking-oap-server
-    tag: "latest"
+    tag: 10.0.0
     pullPolicy: IfNotPresent
-  storageType: null
+  storageType: elasticsearch
   ports:
     # add more ports here if you need, for example
     # zabbix: 10051
@@ -137,7 +137,7 @@ ui:
   replicas: 1
   image:
     repository: skywalking.docker.scarf.sh/apache/skywalking-ui
-    tag: "latest"
+    tag: 10.0.0
     pullPolicy: IfNotPresent
   # podAnnotations:
   #   example: oap-foo
