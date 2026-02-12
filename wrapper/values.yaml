@@ -12,7 +12,7 @@ kube-prometheus-stack:
   fullnameOverride: "prom"
   prometheus:
     thanosService:
-      enabled: true
+      enabled: false
     fullnameOverride: "prom"
     prometheusSpec:
       thanos: 
