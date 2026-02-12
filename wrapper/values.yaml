@@ -11,6 +11,9 @@ kube-prometheus-stack:
     enabled: false
   fullnameOverride: "prom"
   prometheus:
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
     thanosService:
       enabled: false
     fullnameOverride: "prom"
