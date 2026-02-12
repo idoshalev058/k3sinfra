@@ -41,11 +41,11 @@ thanos:
       #sidecarsNamespace: "{{.namespace}}"
       sidecarsNamespace: "shob"
   compactor:
-    enabled: true
+    enabled: false
   storegateway:
-    enabled: true
+    enabled: false
   ruler:
-    enabled: true
+    enabled: false
     # alertmanagers:
     #   - http://prom-alertmanager.{{.namespace}}.svc.cluster.local:9093    
     alertmanagers:
@@ -53,4 +53,4 @@ thanos:
     
     existingConfigmap: "prometheus-ruler-rules"
   receive:
-    enabled: true
+    enabled: false
