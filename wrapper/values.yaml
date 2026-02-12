@@ -40,6 +40,8 @@ thanos:
       sidecarsService: "prom-thanos-discovery"
       #sidecarsNamespace: "{{.namespace}}"
       sidecarsNamespace: "shob"
+  queryFrontend:
+    enabled: false
   compactor:
     enabled: false
   storegateway:
