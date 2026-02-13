@@ -1,45 +1,4 @@
-<<<<<<< HEAD
 ## Provide a name in place of minio for `app:` labels
-=======
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-## @section Global parameters
-## Global Docker image parameters
-## Please, note that this will override the image parameters, including dependencies, configured to use the global value
-## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
-
-## @param global.imageRegistry Global Docker image registry
-## @param global.imagePullSecrets Global Docker registry secret names as an array
-## @param global.defaultStorageClass Global default StorageClass for Persistent Volume(s)
-##
-global:
-  imageRegistry: ""
-  ## e.g.
-  ## imagePullSecrets:
-  ##   - myRegistryKeySecretName
-  ##
-  imagePullSecrets: []
-  defaultStorageClass: ""
-  ## Security parameters
-  ##
-  security:
-    ## @param global.security.allowInsecureImages Allows skipping image verification
-    allowInsecureImages: true
-  ## Compatibility adaptations for Kubernetes platforms
-  ##
-  compatibility:
-    ## Compatibility adaptations for Openshift
-    ##
-    openshift:
-      ## @param global.compatibility.openshift.adaptSecurityContext Adapt the securityContext sections of the deployment to make them compatible with Openshift restricted-v2 SCC: remove runAsUser, runAsGroup and fsGroup and let the platform use their allowed default IDs. Possible values: auto (apply if the detected running cluster is Openshift), force (perform the adaptation always), disabled (do not perform adaptation)
-      ##
-      adaptSecurityContext: auto
-
-## @section Common parameters
-
-## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)
->>>>>>> c378244800c31651d30cd6c16ffad6c12f5ff625
 ##
 nameOverride: ""
 
@@ -54,18 +13,8 @@ clusterDomain: cluster.local
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
 ##
 image:
-<<<<<<< HEAD
   repository: quay.io/minio/minio
   tag: RELEASE.2024-12-18T13-15-44Z
-=======
-  registry: quay.io
-  repository: minio/minio
-  tag: latest-cicd
-  digest: ""
-  ## Specify a imagePullPolicy
-  ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
-  ##
->>>>>>> c378244800c31651d30cd6c16ffad6c12f5ff625
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
