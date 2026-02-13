@@ -4,15 +4,18 @@ kube-prometheus-stack:
     kubeRBACProxy:
       enabled: false
   prometheusOperator:
-    enabled: false
+    enabled: true
   crds:
     enabled: false  
   nodeExporter:
     enabled: false
   fullnameOverride: "prom"
   prometheus:
-    thanosService:
+    ingress:
       enabled: true
+      ingressClassName: "nginx"
+    thanosService:
+      enabled: false
     fullnameOverride: "prom"
     prometheusSpec:
       thanos: 
@@ -40,12 +43,14 @@ thanos:
       sidecarsService: "prom-thanos-discovery"
       #sidecarsNamespace: "{{.namespace}}"
       sidecarsNamespace: "shob"
+  queryFrontend:
+    enabled: false
   compactor:
-    enabled: true
+    enabled: false
   storegateway:
-    enabled: true
+    enabled: false
   ruler:
-    enabled: true
+    enabled: false
     # alertmanagers:
     #   - http://prom-alertmanager.{{.namespace}}.svc.cluster.local:9093    
     alertmanagers:
@@ -53,4 +58,4 @@ thanos:
     
     existingConfigmap: "prometheus-ruler-rules"
   receive:
-    enabled: true
+    enabled: false

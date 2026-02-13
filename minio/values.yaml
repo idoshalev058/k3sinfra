@@ -1,4 +1,45 @@
+<<<<<<< HEAD
 ## Provide a name in place of minio for `app:` labels
+=======
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+## @section Global parameters
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+
+## @param global.imageRegistry Global Docker image registry
+## @param global.imagePullSecrets Global Docker registry secret names as an array
+## @param global.defaultStorageClass Global default StorageClass for Persistent Volume(s)
+##
+global:
+  imageRegistry: ""
+  ## e.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+  defaultStorageClass: ""
+  ## Security parameters
+  ##
+  security:
+    ## @param global.security.allowInsecureImages Allows skipping image verification
+    allowInsecureImages: true
+  ## Compatibility adaptations for Kubernetes platforms
+  ##
+  compatibility:
+    ## Compatibility adaptations for Openshift
+    ##
+    openshift:
+      ## @param global.compatibility.openshift.adaptSecurityContext Adapt the securityContext sections of the deployment to make them compatible with Openshift restricted-v2 SCC: remove runAsUser, runAsGroup and fsGroup and let the platform use their allowed default IDs. Possible values: auto (apply if the detected running cluster is Openshift), force (perform the adaptation always), disabled (do not perform adaptation)
+      ##
+      adaptSecurityContext: auto
+
+## @section Common parameters
+
+## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)
+>>>>>>> c378244800c31651d30cd6c16ffad6c12f5ff625
 ##
 nameOverride: ""
 
@@ -13,8 +54,18 @@ clusterDomain: cluster.local
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
 ##
 image:
+<<<<<<< HEAD
   repository: quay.io/minio/minio
   tag: RELEASE.2024-12-18T13-15-44Z
+=======
+  registry: quay.io
+  repository: minio/minio
+  tag: latest-cicd
+  digest: ""
+  ## Specify a imagePullPolicy
+  ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
+  ##
+>>>>>>> c378244800c31651d30cd6c16ffad6c12f5ff625
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -69,6 +120,7 @@ minioConsolePort: "9001"
 ## Update strategy for Deployments
 deploymentUpdate:
   type: RollingUpdate
+<<<<<<< HEAD
   maxUnavailable: 0
   maxSurge: 100%
 
@@ -78,6 +130,132 @@ statefulSetUpdate:
 
 ## Pod priority settings
 ## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
+=======
+## MinIO&reg; StatefulSet parameters
+## Only when mode is 'distributed'
+##
+statefulset:
+  ## @param statefulset.podManagementPolicy StatefulSet controller supports relax its ordering guarantees while preserving its uniqueness and identity guarantees. There are two valid pod management policies: OrderedReady and Parallel
+  ## ref: https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#pod-management-policy
+  ##
+  podManagementPolicy: Parallel
+  ## @param statefulset.replicaCount Number of pods per zone (only for MinIO&reg; distributed mode). Should be even and `>= 4`
+  ##
+  replicaCount: 2
+  ## @param statefulset.zones Number of zones (only for MinIO&reg; distributed mode)
+  ##
+  zones: 1
+  ## @param statefulset.drivesPerNode Number of drives attached to every node (only for MinIO&reg; distributed mode)
+  ##
+  drivesPerNode: 1
+## @param automountServiceAccountToken Mount Service Account token in pod
+##
+automountServiceAccountToken: false
+## @param hostAliases MinIO&reg; pod host aliases
+## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
+##
+hostAliases: []
+## @param containerPorts.api MinIO&reg; container port to open for MinIO&reg; API
+##
+containerPorts:
+  api: 9000
+## MinIO&reg; pod Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+## @param podSecurityContext.enabled Enable pod Security Context
+## @param podSecurityContext.sysctls Set kernel settings using the sysctl interface
+## @param podSecurityContext.supplementalGroups Set filesystem extra groups
+## @param podSecurityContext.fsGroup Group ID for the container
+## @param podSecurityContext.fsGroupChangePolicy Set filesystem group change policy
+## @param podSecurityContext.sysctls Set kernel settings using the sysctl interface
+## @param podSecurityContext.supplementalGroups Set filesystem extra groups
+## @param podSecurityContext.fsGroupChangePolicy When K8s should preform chown on attached volumes
+##
+podSecurityContext:
+  enabled: true
+  sysctls: []
+  supplementalGroups: []
+  fsGroup: 1001
+  fsGroupChangePolicy: "OnRootMismatch"
+## MinIO&reg; container Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+## @param containerSecurityContext.enabled Enabled containers' Security Context
+## @param containerSecurityContext.seLinuxOptions [object,nullable] Set SELinux options in container
+## @param containerSecurityContext.runAsUser Set containers' Security Context runAsUser
+## @param containerSecurityContext.runAsGroup Set containers' Security Context runAsGroup
+## @param containerSecurityContext.runAsNonRoot Set container's Security Context runAsNonRoot
+## @param containerSecurityContext.privileged Set container's Security Context privileged
+## @param containerSecurityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+## @param containerSecurityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+## @param containerSecurityContext.capabilities.drop List of capabilities to be dropped
+## @param containerSecurityContext.seccompProfile.type Set container's Security Context seccomp profile
+##
+containerSecurityContext:
+  enabled: true
+  seLinuxOptions: {}
+  runAsUser: 1001
+  runAsGroup: 1001
+  runAsNonRoot: true
+  privileged: false
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+  seccompProfile:
+    type: "RuntimeDefault"
+## @param podLabels Extra labels for MinIO&reg; pods
+## Ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+##
+podLabels: {}
+## @param podAnnotations Annotations for MinIO&reg; pods
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+## @param podAffinityPreset Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+##
+podAffinityPreset: ""
+## @param podAntiAffinityPreset Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+##
+podAntiAffinityPreset: soft
+## Node affinity preset
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+##
+nodeAffinityPreset:
+  ## @param nodeAffinityPreset.type Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+  ##
+  type: ""
+  ## @param nodeAffinityPreset.key Node label key to match. Ignored if `affinity` is set.
+  ## E.g.
+  ## key: "kubernetes.io/e2e-az-name"
+  ##
+  key: ""
+  ## @param nodeAffinityPreset.values Node label values to match. Ignored if `affinity` is set.
+  ## E.g.
+  ## values:
+  ##   - e2e-az1
+  ##   - e2e-az2
+  ##
+  values: []
+## @param affinity Affinity for pod assignment. Evaluated as a template.
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+## Note: podAffinityPreset, podAntiAffinityPreset, and nodeAffinityPreset will be ignored when it's set
+##
+affinity: {}
+## @param nodeSelector Node labels for pod assignment. Evaluated as a template.
+## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+##
+nodeSelector: {}
+## @param tolerations Tolerations for pod assignment. Evaluated as a template.
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+## @param topologySpreadConstraints Topology Spread Constraints for MinIO&reg; pods assignment spread across your cluster among failure-domains
+## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
+##
+topologySpreadConstraints: []
+## @param priorityClassName MinIO&reg; pods' priorityClassName
+>>>>>>> c378244800c31651d30cd6c16ffad6c12f5ff625
 ##
 priorityClassName: ""
 
