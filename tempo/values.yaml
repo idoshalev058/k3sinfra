@@ -117,7 +117,7 @@ tempo:
       # store traces in s3
       s3:
         bucket: tempo                       # store traces in this bucket
-        endpoint: 192.168.134.2:9000 
+        endpoint: 192.168.68.55:9000 
         access_key: "admin"                                 # optional. access key when using static credentials.
         secret_key: "password"                                 # optional. secret key when using static credentials.
         insecure: true                                 # optional. enable if endpoint is http
