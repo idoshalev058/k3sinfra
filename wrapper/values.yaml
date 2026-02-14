@@ -18,6 +18,7 @@ kube-prometheus-stack:
       enabled: false
     fullnameOverride: "prom"
     prometheusSpec:
+      enableRemoteWriteReceiver: true
       thanos: 
         objectStorageConfig:
           secret: 
