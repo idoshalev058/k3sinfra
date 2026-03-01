@@ -29,7 +29,9 @@ spec:
   template:
     metadata:
       annotations:
+        {{- if .Values.enableConfigChecksumAnnotation }}
         {{- include "opentelemetry-collector.configTemplateChecksumAnnotation" . | nindent 8 }}
+        {{- end }}
         {{- include "opentelemetry-collector.podAnnotations" . | nindent 8 }}
       labels:
         {{- include "opentelemetry-collector.selectorLabels" . | nindent 8 }}
@@ -40,6 +42,7 @@ spec:
       {{- $podData := dict "Values" $podValues "configmapSuffix" "-agent" "isAgent" true }}
       {{- include "opentelemetry-collector.pod" ($podData | mustMergeOverwrite (deepCopy .)) | nindent 6 }}
       hostNetwork: {{ .Values.hostNetwork }}
+      hostPID: {{ .Values.hostPID }}
       {{- with .Values.dnsPolicy }}
       dnsPolicy: {{ . }}
       {{- end }}
