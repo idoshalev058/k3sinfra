@@ -8,7 +8,7 @@ kube-prometheus-stack:
   crds:
     enabled: false  
   nodeExporter:
-    enabled: false
+    enabled: true
   fullnameOverride: "prom"
   prometheus:
     ingress:
