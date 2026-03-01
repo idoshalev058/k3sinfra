@@ -3,6 +3,10 @@ kube-prometheus-stack:
     enabled: true
     kubeRBACProxy:
       enabled: false
+  prometheus-node-exporter:
+    enabled: true
+    kubeRBACProxy:
+      enabled: false
   prometheusOperator:
     enabled: true
   crds:
