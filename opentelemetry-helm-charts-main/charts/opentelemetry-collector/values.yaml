@@ -141,6 +141,10 @@ internalTelemetryViaOTLP:
 config:
   exporters:
     debug: {}
+    prometheus:
+      endpoint: "0.0.0.0:8889"
+      resource_to_telemetry_conversion:
+        enabled: true
   extensions:
     # The health_check extension is mandatory for this chart.
     # Without the health_check extension the collector will fail the readiness and liveness probes.
@@ -157,6 +161,38 @@ config:
       limit_percentage: 80
       # By default spike_limit_mib is set to 25% of ".Values.resources.limits.memory"
       spike_limit_percentage: 25
+  connectors:
+    spanmetrics:
+      histogram:
+        explicit:
+          # התיקון שהיה חסר:
+          buckets: [5ms, 10ms, 50ms, 100ms, 250ms, 500ms, 1s, 2s, 5s, 10s]
+      dimensions:
+        - name: http.method
+        - name: http.status_code
+        - name: http.route
+        - name: k8s.cluster.name
+        - name: k8s.namespace.name
+        - name: k8s.deployment.name
+        - name: k8s.pod.name
+      namespace: span_metrics
+    servicegraph:
+      dimensions:
+        - k8s.cluster.name
+        - k8s.node.name               
+        - k8s.namespace.name
+        - k8s.deployment.name
+        - k8s.pod.name
+      virtual_node_peer_attributes:
+      - peer.service      
+      - db.name           
+      - db.system         
+      - rpc.system       
+      - server.address
+      virtual_node_extra_label: true
+      store:
+        max_items: 10000
+        ttl: 2s
   receivers:
     jaeger:
       protocols:
@@ -205,17 +241,18 @@ config:
           - otlp
       metrics:
         exporters:
-          - debug
+          - prometheus
         processors:
           - memory_limiter
           - batch
         receivers:
-          - otlp
-          # if internalTelemetryViaOTLP.metrics.enabled = true, prometheus receiver will be removed
-          - prometheus
+          - spanmetrics
+          - servicegraph
       traces:
         exporters:
           - debug
+          - spanmetrics
+          - servicegraph
         processors:
           - memory_limiter
           - batch
