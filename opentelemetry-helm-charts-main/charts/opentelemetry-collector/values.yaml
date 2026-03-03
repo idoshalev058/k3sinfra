@@ -648,9 +648,9 @@ podMonitor:
 serviceMonitor:
   # The service monitor by default scrapes the metrics port.
   # The metrics port needs to be enabled as well.
-  enabled: false
+  enabled: true
   metricsEndpoints:
-    - port: metrics
+    - port: prometheus
       # interval: 15s
 
   # additional labels for the ServiceMonitor
