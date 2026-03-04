@@ -159,11 +159,15 @@ config:
           statements:
             - set(attributes["peer.service"], attributes["server.address"]) where kind == SPAN_KIND_CLIENT and attributes["peer.service"] == nil and attributes["server.address"] != nil
             - set(attributes["peer.service"], attributes["net.peer.name"]) where kind == SPAN_KIND_CLIENT and attributes["peer.service"] == nil and attributes["net.peer.name"] != nil
-
-            - set(attributes["peer.service"], attributes["http.request.header.x_client_name"]) where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil and attributes["http.request.header.x_client_name"] != nil
-            - set(attributes["peer.service"], "Mobile-App-Client") where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil and IsMatch(attributes["user_agent.original"], ".*(iPhone|Android).*")
-            - set(attributes["peer.service"], "Web-Browser-Client") where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil and IsMatch(attributes["user_agent.original"], ".*(Mozilla|Chrome|Safari).*")
-            - set(attributes["peer.service"], "Unknown-External-Client") where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil
+    transform/add_browser_dim:
+      error_mode: ignore
+      trace_statements:
+        - context: span
+          statements:
+            # Create a new attribute 'browser_type' on incoming server spans
+            - set(attributes["browser_type"], "Mobile-App") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(iPhone|Android).*")
+            - set(attributes["browser_type"], "Web-Browser") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(Mozilla|Chrome|Safari).*")
+            - set(attributes["browser_type"], "Unknown-Client") where kind == SPAN_KIND_SERVER and attributes["browser_type"] == nil
     k8sattributes:
       auth_type: "serviceAccount"
       passthrough: false
@@ -203,6 +207,7 @@ config:
         - name: k8s.namespace.name
         - name: k8s.deployment.name
         - name: k8s.pod.name
+        - name: browser_type
       namespace: span_metrics
     servicegraph:
       dimensions:
@@ -285,6 +290,7 @@ config:
           - memory_limiter
           - k8sattributes
           - transform/virtual_nodes_only
+          - transform/add_browser_dim
           - batch
         receivers:
           - otlp
