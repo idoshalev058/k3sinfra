@@ -140,7 +140,8 @@ internalTelemetryViaOTLP:
 # For example, {{ REDACTED_EMAIL }} becomes {{` {{ REDACTED_EMAIL }} `}}.
 config:
   exporters:
-    debug: {}
+    debug:
+      verbosity: detailed
     prometheus:
       endpoint: "0.0.0.0:8889"
       resource_to_telemetry_conversion:
