@@ -284,6 +284,7 @@ config:
         processors:
           - memory_limiter
           - k8sattributes
+          - transform/virtual_nodes_only
           - batch
         receivers:
           - otlp
