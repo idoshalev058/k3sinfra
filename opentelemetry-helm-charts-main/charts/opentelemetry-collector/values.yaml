@@ -215,12 +215,14 @@ config:
         - k8s.namespace.name
         - k8s.deployment.name
         - k8s.pod.name
+        - browser_type
       virtual_node_peer_attributes:
       - peer.service      
       - db.name           
       - db.system         
       - rpc.system       
       - server.address
+      - browser_type
       virtual_node_extra_label: true
       store:
         max_items: 10000
