@@ -165,8 +165,9 @@ config:
       trace_statements:
         - context: span
           statements:
-            - set(attributes["browser_type"], "Mobile-App") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(iPhone|Android).*")
-            - set(attributes["browser_type"], "Web-Browser") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(Mozilla|Chrome|Safari).*")
+            # Changed to http.user_agent
+            - set(attributes["browser_type"], "Mobile-App") where kind == SPAN_KIND_SERVER and IsMatch(attributes["http.user_agent"], ".*(iPhone|Android).*")
+            - set(attributes["browser_type"], "Web-Browser") where kind == SPAN_KIND_SERVER and IsMatch(attributes["http.user_agent"], ".*(Mozilla|Chrome|Safari).*")
             - set(attributes["browser_type"], "Unknown-Client") where kind == SPAN_KIND_SERVER and attributes["browser_type"] == nil
     k8sattributes:
       auth_type: "serviceAccount"
