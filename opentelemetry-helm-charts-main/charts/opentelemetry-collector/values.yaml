@@ -159,15 +159,14 @@ config:
           statements:
             - set(attributes["peer.service"], attributes["server.address"]) where kind == SPAN_KIND_CLIENT and attributes["peer.service"] == nil and attributes["server.address"] != nil
             - set(attributes["peer.service"], attributes["net.peer.name"]) where kind == SPAN_KIND_CLIENT and attributes["peer.service"] == nil and attributes["net.peer.name"] != nil
-#    transform/add_browser_dim:
-#      error_mode: ignore
-#      trace_statements:
-#        - context: span
-#          statements:
-            # Create a new attribute 'browser_type' on incoming server spans
-#            - set(attributes["browser_type"], "Mobile-App") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(iPhone|Android).*")
-#            - set(attributes["browser_type"], "Web-Browser") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(Mozilla|Chrome|Safari).*")
-#            - set(attributes["browser_type"], "Unknown-Client") where kind == SPAN_KIND_SERVER and attributes["browser_type"] == nil
+    transform/add_browser_dim:
+      error_mode: ignore
+      trace_statements:
+        - context: span
+          statements:
+            - set(attributes["browser_type"], "Mobile-App") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(iPhone|Android).*")
+            - set(attributes["browser_type"], "Web-Browser") where kind == SPAN_KIND_SERVER and IsMatch(attributes["user_agent.original"], ".*(Mozilla|Chrome|Safari).*")
+            - set(attributes["browser_type"], "Unknown-Client") where kind == SPAN_KIND_SERVER and attributes["browser_type"] == nil
     k8sattributes:
       auth_type: "serviceAccount"
       passthrough: false
