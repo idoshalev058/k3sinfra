@@ -169,6 +169,13 @@ config:
             - set(attributes["browser_type"], "Mobile-App") where kind == SPAN_KIND_SERVER and IsMatch(attributes["http.user_agent"], ".*(iPhone|Android).*")
             - set(attributes["browser_type"], "Web-Browser") where kind == SPAN_KIND_SERVER and IsMatch(attributes["http.user_agent"], ".*(Mozilla|Chrome|Safari).*")
             - set(attributes["browser_type"], "Unknown-Client") where kind == SPAN_KIND_SERVER and attributes["browser_type"] == nil
+    transform/rewrite_client_name:
+      error_mode: ignore
+      metric_statements:
+        - context: datapoint
+          statements:
+            # Replace 'user' with the value from our dimension (e.g., 'Web-Browser')
+            - set(attributes["client"], attributes["server_browser_type"]) where attributes["client"] == "user" and attributes["server_browser_type"] != nil
     k8sattributes:
       auth_type: "serviceAccount"
       passthrough: false
@@ -280,6 +287,7 @@ config:
           - prometheus
         processors:
           - memory_limiter
+          - transform/rewrite_client_name
           - batch
         receivers:
           - spanmetrics
