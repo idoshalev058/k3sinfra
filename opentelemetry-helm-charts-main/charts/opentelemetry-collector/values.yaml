@@ -152,6 +152,18 @@ config:
     health_check:
       endpoint: ${env:MY_POD_IP}:13133
   processors:
+    transform/virtual_nodes_only:
+      error_mode: ignore
+      trace_statements:
+        - context: span
+          statements:
+            - set(attributes["peer.service"], attributes["server.address"]) where kind == SPAN_KIND_CLIENT and attributes["peer.service"] == nil and attributes["server.address"] != nil
+            - set(attributes["peer.service"], attributes["net.peer.name"]) where kind == SPAN_KIND_CLIENT and attributes["peer.service"] == nil and attributes["net.peer.name"] != nil
+
+            - set(attributes["peer.service"], attributes["http.request.header.x_client_name"]) where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil and attributes["http.request.header.x_client_name"] != nil
+            - set(attributes["peer.service"], "Mobile-App-Client") where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil and IsMatch(attributes["user_agent.original"], ".*(iPhone|Android).*")
+            - set(attributes["peer.service"], "Web-Browser-Client") where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil and IsMatch(attributes["user_agent.original"], ".*(Mozilla|Chrome|Safari).*")
+            - set(attributes["peer.service"], "Unknown-External-Client") where kind == SPAN_KIND_SERVER and attributes["peer.service"] == nil
     k8sattributes:
       auth_type: "serviceAccount"
       passthrough: false
