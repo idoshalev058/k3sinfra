@@ -215,7 +215,6 @@ config:
         - name: k8s.cluster.name
         - name: k8s.namespace.name
         - name: k8s.deployment.name
-        - name: k8s.service.name
         - name: k8s.pod.name
         - name: browser_type
       namespace: span_metrics
@@ -226,7 +225,6 @@ config:
         - k8s.namespace.name
         - k8s.deployment.name
         - k8s.pod.name
-        - k8s.service.name
         - browser_type
       virtual_node_peer_attributes:
       - peer.service      
@@ -234,7 +232,6 @@ config:
       - db.system         
       - rpc.system       
       - server.address
-      - k8s.service.name
       - browser_type
       virtual_node_extra_label: true
       store:
