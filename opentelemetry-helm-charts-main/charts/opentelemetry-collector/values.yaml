@@ -185,7 +185,6 @@ config:
           - k8s.namespace.name
           - k8s.node.name
           - k8s.pod.name
-          - k8s.service.name
         labels:
           # Extracts all node labels and prefixes them with "node.label."
           - tag_name: node.label.%s
