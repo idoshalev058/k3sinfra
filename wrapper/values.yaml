@@ -44,6 +44,7 @@ thanos:
         insecure: true
         signature_version2: false  
   query:
+    enabled: false
     dnsDiscovery:
       sidecarsService: "prom-thanos-discovery"
       #sidecarsNamespace: "{{.namespace}}"
