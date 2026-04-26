@@ -10,7 +10,7 @@ kube-prometheus-stack:
   prometheusOperator:
     enabled: true
   crds:
-    enabled: false  
+    enabled: true  
   #nodeExporter:
   #  enabled: true
   fullnameOverride: "prom"
