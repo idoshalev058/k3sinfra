@@ -282,7 +282,7 @@ dashboard:
   # Image pull policy
   imagePullPolicy: IfNotPresent
   # securityMode requires user to provide credentials on Chaos Dashboard, instead of using chaos-dashboard service account
-  securityMode: true
+  securityMode: false
   # Enable GCP Authentication Integration, see: https://chaos-mesh.org/docs/gcp-authentication/ for more details
   gcpSecurityMode:
     enabled: false
