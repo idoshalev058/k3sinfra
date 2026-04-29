@@ -554,9 +554,10 @@ alertmanager:
       # Just the URL and the send_resolved flag. No http_config needed.
         - url: 'http://keep-backend.keep.svc.cluster.local:8080/alerts/event/prometheus'
           send_resolved: true
-          basic_auth:
-            username: "api_key" 
-            password: "d6b2857b-e162-4637-9140-32a51d135410"
+          http_config:
+            basic_auth:
+              username: "api_key" 
+              password: "d6b2857b-e162-4637-9140-32a51d135410"
     templates:
     - '/etc/alertmanager/config/*.tmpl'
 
