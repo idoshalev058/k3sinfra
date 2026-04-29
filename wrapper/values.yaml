@@ -1,4 +1,10 @@
 kube-prometheus-stack:
+  alertmanager:
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+      hosts:
+        - alertmanager.idos-labs.com
   kube-state-metrics:
     enabled: true
     kubeRBACProxy:
