@@ -18,6 +18,8 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       ingressClassName: "nginx"
+      hosts:
+        - prometheus.idos-labs.com
     thanosService:
       enabled: false
     fullnameOverride: "prom"
