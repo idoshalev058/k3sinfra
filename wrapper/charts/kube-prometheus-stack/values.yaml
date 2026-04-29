@@ -538,11 +538,22 @@ alertmanager:
       repeat_interval: 12h
       receiver: 'null'
       routes:
+      - receiver: "keep"
+        group_by: ['alertname']
+        group_wait: 15s
+        group_interval: 15s
+        repeat_interval: 1m
+        continue: true
       - receiver: 'null'
         matchers:
           - alertname = "Watchdog"
     receivers:
     - name: 'null'
+    - name: "keep"
+      webhook_configs:
+      # Just the URL and the send_resolved flag. No http_config needed.
+        - url: 'http://keep-backend/alerts/event/prometheus'
+          send_resolved: true
     templates:
     - '/etc/alertmanager/config/*.tmpl'
 
