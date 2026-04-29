@@ -552,7 +552,7 @@ alertmanager:
     - name: "keep"
       webhook_configs:
       # Just the URL and the send_resolved flag. No http_config needed.
-        - url: 'http://keep-backend.svc.cluster.local:8080/alerts/event/prometheus'
+        - url: 'http://keep-backend.keep.svc.cluster.local:8080/alerts/event/prometheus'
           send_resolved: true
     templates:
     - '/etc/alertmanager/config/*.tmpl'
